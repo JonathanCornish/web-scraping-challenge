@@ -93,7 +93,7 @@ def scrape_info():
 
 ## Mars Facts Table Scrape ##
 
-    # browser = init_browser()
+    
     facts_url = "https://space-facts.com/mars/"
     browser.visit(facts_url)
     time.sleep(1)
@@ -103,11 +103,11 @@ def scrape_info():
 
     # scrape the table using pandas & convert to dataframe using [0] for first item
     tables = pd.read_html(facts_url)[0]
-    # tables
+
     # create the column titles & set the index to Field
     tables.columns = ['Field', 'Value']
     tables = tables.set_index('Field')
-    # tables
+
 
     html_table = tables.to_html()
     # remove '\n's for aesthetic enhancement:
@@ -117,7 +117,6 @@ def scrape_info():
 
 # MARS HEMISPHERE PICS
 
-    # browser = init_browser()
     hemis_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(hemis_url)
     html = browser.html
@@ -125,7 +124,6 @@ def scrape_info():
 
     hemis_soup = bs(html, "html.parser")
     hemis = hemis_soup.find_all('div', class_='description')
-    # hemis
 
     # create the dictionary to store the title & image url for each of the four hemispheres:
     hemi_dict = []
@@ -157,12 +155,12 @@ def scrape_info():
         # append the hemisphere title + url to the dictionary
         hemi_dict.append({"title": title, "img_url": img_url})
 
-        # append hemi_dict to mars_dict
-        mars_dict['Hemisphere URLs'] = hemi_dict
+    # append hemi_dict to mars_dict
+    mars_dict['Hemisphere URLs'] = hemi_dict
 
-        # add current date & time to mars_dict
-        current_dt = dt.datetime.utcnow()
-        mars_dict['Date_Time'] = current_dt
+    # add current date & time to mars_dict
+    current_dt = dt.datetime.utcnow()
+    mars_dict['Date_Time'] = current_dt
 
     
     final_dict = {
